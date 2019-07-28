@@ -4,20 +4,19 @@
 
 # list
 
-* 我的阅读[书单](书单.md)
+## 想法和阅读
 
-* 我的想法和任务[TASK](TASK.md)
+* [书单](mind/books.md)
+* [todo list](mind/TASK.md)
 
-* MySQL学习及备忘[MySQL](MySQL.md)
+## 数据存储
 
-* Redis学习及备忘[redis](redis.md)
+* [MySQL](db/MySQL.md)
+* [redis](db/redis.md)
+* [MongoDB](db/mongo.md)
+* [zookeeper](db/zookeeper.md)
 
-* zookeeper学习及备忘[zookeeper](zookeeper.md)
+### 消息
 
-* kafka学习及备忘[kafka](kafka.md)
-
-* mongodb学习及备忘[mongo](mongo.md)
-
-
-
+* [Kafka](message/kafka.md)
 
