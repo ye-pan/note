@@ -5,7 +5,7 @@
 ## 进行中
 
 * 重写lexi
-* spring学习
+* 积极心理学
 * 研究spring-beans，spring-context，spring-aop，spring-tx源代码
 
 ## 待完成
