@@ -1,20 +1,9 @@
-# note
+# NOTE
 
-[TOC]
+阅读及学习一些东西的简单笔记
 
-## 想法和阅读
+# 连接
 
-* [书单](mind/books.md)
-* [todo list](mind/TASK.md)
-
-## 数据存储
-
-* [MySQL](db/MySQL.md)
-* [redis](db/redis.md)
-* [MongoDB](db/mongo.md)
-* [zookeeper](db/zookeeper.md)
-
-## 消息
-
-* [Kafka](message/kafka.md)
+* [索引](db/index.md)
+* 
 
