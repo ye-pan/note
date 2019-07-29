@@ -1,8 +1,6 @@
 # note
 
-平时各个方面的笔记
-
-# list
+[TOC]
 
 ## 想法和阅读
 
@@ -16,7 +14,7 @@
 * [MongoDB](db/mongo.md)
 * [zookeeper](db/zookeeper.md)
 
-### 消息
+## 消息
 
 * [Kafka](message/kafka.md)
 
