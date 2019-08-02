@@ -6,7 +6,7 @@
 
 * 重写lexi
 * 积极心理学
-* 研究spring-beans，spring-context，spring-aop，spring-tx源代码
+* redis
 
 ## 待完成
 
