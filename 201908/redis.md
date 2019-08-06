@@ -37,6 +37,10 @@ systemctl enable redis
 
   ![1564700431640](assets/1564700431640.png)
 
+* linux——centos7，安装redis防火墙策略配置
+
+  ![1564977838940](assets/1564977838940.png)
+
 ## redis
 
 ### redis数据结构
@@ -48,4 +52,6 @@ systemctl enable redis
 | set      | 包含字符串的无序容器，每个值唯一 |                |
 | hash     | 无序散列表                       |                |
 | zset     | 有序容器                         |                |
+
+### 复制
 
