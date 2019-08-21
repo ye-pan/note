@@ -4,34 +4,23 @@
 
 ## 进行中
 
-* 重写lexi
+* 学习JVM
 * 积极心理学
 * redis
 
 ## 待完成
 
 * zookeeper
-
 * redis
-
 * Kafka
-
 * mongodb
-
 * mysql
-
 * netty 
-
 * lucence
-
 * 开始刷letcode
-
 * 学习TCP/IP协议
-
 * 学习JVM
-
 * 看tomcat-jdbc-pool源代码
-
 * tomcat：搭建tomcat集群，搭建tomcat session共享 
-
 * tomcat源码研究：tomcat源代码本地构建，tomcat对Java IO库的使用，tomcat程序内内存使用
+* 拜占庭式将军问题
