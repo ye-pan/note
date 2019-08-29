@@ -6,7 +6,7 @@
 
 * 数据密集型应用系统设计
 * springcloud微服务实战
-* zookeeper学习
+* 高性能MySQL
 * 深入理解Java虚拟机
 
 ## 待进行

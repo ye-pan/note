@@ -6,12 +6,10 @@
 
 * 学习JVM
 * 积极心理学
-* redis
+* zookeeper
 
 ## 待完成
 
-* zookeeper
-* redis
 * Kafka
 * mongodb
 * mysql
@@ -24,3 +22,8 @@
 * tomcat：搭建tomcat集群，搭建tomcat session共享 
 * tomcat源码研究：tomcat源代码本地构建，tomcat对Java IO库的使用，tomcat程序内内存使用
 * 拜占庭式将军问题
+
+## 完成
+
+* redis
+* 
