@@ -1,10 +1,12 @@
 # Java并发
 
+## 并发
+
 并发：
 
 并行：
 
-## 线程 Thread
+## Java线程
 
 线程调度：
 
@@ -93,18 +95,30 @@ JMM定义的8种操作，用于变量在主内存和工作内存之间同步：
 
 ## 同步
 
-### volatile
+### Java内置的同步机制
+
+#### volatile
 
 volatile是Java虚拟机提供的轻量级同步机制：
 
 - 影响修饰的变量的可见性，即任何线程对变量的改动都会立即反映到其它所有线程中
 - 禁止指令重排序优化
 
-### synchronized
+#### synchronized
 
 wait，notify，notifyAll：wait会自动释放当前锁，并请求操作系统挂起当前线程，从而使其它线程能够获得这个锁并修改对象的状态，当被挂起的线程醒来时，它将在返回之前重新获取锁。
 
+* 影响所修饰代码块的内存可见性
+* 禁止所修饰代码块的指令重排
+* 以互斥的方式访问所修饰的代码块
+
+### Java同步集合
+
+## Java并发库
+
 ### Lock
+
+lock和内置的synchronized一样，只是提供了除基本lock/unlock功能之外的其它一些功能，比如tryLock/tryLock(time)，lockInterruptibly，newCondition等功能。显示锁Lock并不是替代内置锁的一种方式，而是当内置加锁机制不适用时，作为一种可选择的高级功能。
 
 ```java
 public interface Lock {    
@@ -115,10 +129,7 @@ public interface Lock {
     void unlock();
     Condition newCondition();
 }
-
 ```
-
-> 显示锁Lock并不是替代内置锁的一种方式，而是当内置加锁机制不适用时，作为一种可选择的高级功能
 
 读写锁：
 
@@ -129,7 +140,9 @@ public interface ReadWriteLock {
 }
 ```
 
-## 并发框架
+### 原子对象
+
+
 
 ### 线程池
 
@@ -175,3 +188,8 @@ return new DelegatedScheduledExecutorService
             (new ScheduledThreadPoolExecutor(1));
 ```
 
+## 参考
+
+* 《Java并发编程实践》
+* 《操作系统导论》
+* 《精通Java并发编程》
