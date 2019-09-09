@@ -5,7 +5,7 @@
 ## 进行中
 
 * 学习JVM
-* 积极心理学
+* coding
 * zookeeper
 
 ## 待完成
