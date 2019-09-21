@@ -206,6 +206,13 @@ Executor，ExecutorService，ThreadPoolExecutor
 
 executor解耦任务的提交与执行，基于生产-消费者模式，提交任务的操作相当于生产者，执行任务的线程则相当于消费者。
 
+饱和策略，JDK提供了RejectedExecutionHandler来实现，提交到一个已被关闭的Executor中也会用到饱和策略：
+
+* AbortPolicy，默认的饱和策略，将会抛出RejectedExecutionException，可以捕获该异常自己进行处理
+* DiscardPolicy，当新提交的任务无法保存到队列中等待执行时，会悄悄抛弃该任务
+* DiscardOldestPolicy，会抛弃下一个将被执行的任务，如果工作队列是一个优先级队列，那么将会抛弃优先级最高的任务
+* CallerRunsPolicy，实现了一种调节机制，该策略既不会抛弃任务也不会抛出异常，而是将某些任务回退到调用者，从而降低新任务的流量，它不会再线程池的线程中执行新提交的任务，而是在调用了executor的线程中执行该任务
+
 Executors的几个工厂方法：
 
 newFixedThreadPool：创建一个固定长度的线程池，代码
