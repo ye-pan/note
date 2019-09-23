@@ -139,6 +139,16 @@ B-Tree索引适用于全键值，键值范围或键前缀查找。能够有效�
 * 不能跳过索引中的列
 * 如果查询中有某个列的范围查询，则其右边所有列都无法使用索引优化查找
 
+索引失效：
+
+* 查询列中有函数计算
+* 查询列中有模糊匹配
+* 如果查询条件中有or，索引会失效，除非所有条件都加上索引
+* 使用不等于（!= 或 <>）
+* is null 或者 is not null
+* 字符串不加引号会导致索引实效
+* 联合索引中不符合最左匹配原则
+
 索引列的顺序非常重要，上面关于索引有效性的限制都和索引顺序有关。
 
 #### 哈希索引
@@ -345,7 +355,47 @@ show full processlist，查看所有线程，线程状态：
 
 SQL->查询缓存->解析器->解析树->预处理器->解析树->查询优化器->查询执行计划->查询执行引擎->存储引擎->查询缓存->返回
 
+## explain
 
+![1569196503105](../assets/1569196503105.png)
+
+* select_type：
+  * SIMPLE：简单查询，不包括子查询，关联查询
+  * PRIMARY：查询中如果有复杂的部分，最外层的查询将被标记为PRIMARY
+  * UNION：union中第二个或后面的select语句
+  * DEPENDENT UNION：union中的第二个或后面的select语句，取决于外面的查询
+  * UNION RESULT：union的结果，union语句中第二个select开始后面所有的select
+  * SUBQUERY：子查询中的第一个，结果不依赖于外部查询
+  * DEPENDENT SUBQUERY：子查询中的第一个SELECT，依赖于外部查询
+  * DERIVED：派生表的SELECT, FROM 子句的子查询
+  * UNCACHEABLE SUBQUERY：一个子查询的结果不能被缓存，必须重新评估外连接的第一行
+* type，查询性能一次递增：
+  * ALL：全表扫描，最耗性能，遍历全表
+  * index：全索引列表扫描，遍历索引树
+  * range：对单个索引列进行范围查找
+  * index_merge：多个索引合并查询
+  * ref：根据单个索引查找，表示上述表的连接匹配条件
+  * eq_ref：连接时使用primary key 或者 unique类型
+  * constant：常量，MySQL对查询某部分进行优化，并转换为一个常量时，使用这些类型访问。如将主键置于where列表中，MySQL将能将该查询转换为一个常量
+  * system：系统，是constant的特例，当查询只有一行的情况下，使用system
+  * NULL：MySQL在优化过程中分解语句，执行时甚至不用访问表或索引，例如从一个索引例去最小值可以通过单独索引查找完成
+* possible_key，可能使用的索引
+* key，真实使用的索引
+* rows，扫描的行数
+* extra，包含MySQL为了解决查询的详细信息：
+  * using index：将使用覆盖索引，以避免表访问
+  * using where：MySQL服务器将在存储殷勤检索后再进行过滤，暗示：查询可受益于不同的索引
+  * using temporary：意味着MySQL在对查询结果排序时会使用一个临时表
+  * using filesort：
+  * range checked for each record 
+
+关于explain：
+
+* explain不会告诉你关于触发器，存储过程的信息或用户自定义对查询的影响情况
+* explain不考虑各种cache
+* explain不能显示MySQL在执行查询时所作的优化工作
+* 部分统计信息是估算的，并非精确
+* explain只能解释select操作，其它操作要重写为select后查看执行计划
 
 ## 锁
 
