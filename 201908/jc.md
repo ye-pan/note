@@ -136,7 +136,7 @@ Happens-Before关系：
 
 ### Java内置的同步机制
 
-volatile是Java虚拟机提供的轻量级同步机制：
+volatile是Java虚拟机提供的轻量级同步机制，影响可见性和原子性：
 
 - 影响修饰的变量的可见性，即任何线程对变量的改动都会立即反映到其它所有线程中
 - 禁止指令重排序优化
@@ -189,6 +189,10 @@ public interface ReadWriteLock {
     Lock writeLock();
 }
 ```
+
+ReentrantLock：
+
+ReentrantReadWriteLock：
 
 ### 原子对象
 
