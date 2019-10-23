@@ -4,8 +4,8 @@
 
 ## 进行中
 
-* spring源码学习
-* coding
+* 学习Clojure编程语言
+* 
 * 
 
 ## 待完成
