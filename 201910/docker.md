@@ -91,6 +91,7 @@ docker实现的能力
 ### centos
 
 ```shell
+#卸载已安装的docker
 sudo yum remove docker \
 		docker-client \
 		docker-client-latest \
@@ -101,7 +102,32 @@ sudo yum remove docker \
 		docker-selinux \
 		docker-engine-selinux \
 		docker-engine
+#安装依赖包
+docker install -y yum-utils device-mapper-persistent-data lvm2
+#为yum添加国内的docker源
+yum--config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+#更新yum缓存，安装docker-ce
+yum makecache fast
+yum install -y docker-ce
+#为docker设置国内仓库镜像
+vim /etc/docker/daemon.json
 ```
+
+daemon.json内容
+
+```json
+{
+    "registry-mirrors":[
+        "https://dockerhub.azk8s.cn",
+        "https://reg-mirror.qiniu.com"
+    ]
+}
+
+```
+
+
+
+![image-20191102152119281](assets/image-20191102152119281.png)
 
 
 
@@ -377,3 +403,12 @@ dockerfile的基本指令介绍：
 --mount标记也可以指定挂载一个本地主机的目录到容器中去
 
 <img src="assets/image-20191027104621736.png" alt="image-20191027104621736" style="zoom:200%;" />
+
+### 容器网络访问
+
+#### 外部访问容器
+
+
+
+#### 容器互联
+
