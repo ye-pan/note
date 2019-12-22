@@ -16,6 +16,3 @@
 * [操作系统](操作系统/README.md)
   * [操作系统](操作系统/linux_os.md)
   * [CentOS](操作系统/centos.md)
-* [阅读](阅读/README.md)
-  * [书单](阅读/books.md)
-  * [任务](阅读/task.md)
