@@ -487,6 +487,164 @@ redo，在InnoDB种，事务日志通过重做日志文件和InnoDB存储引擎�
 
 针对相同的表进行的连接被称为自连接。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
+## MySQL操作
+
+常用命令：show databases，show tables，describe tablename，show variables like '%'， show create database db_name，
+
+导入*.sql文件：source *.sql
+
+迁库/备份（innodb）：
+
+在innodb模式下只有数据库的data文件，之前没有任何备份措施，恢复数据库。步骤：
+
+1. 删掉现有mysql服务的data文件夹（记得备份）；
+
+2. 将需要恢复的data文件夹放在对应的位置；
+
+3. 修改my.cnf，加入innodb_force_recovery=4或者6；
+
+4. 直接启动，应该可以直接使用了；
+
+5. mysqldump备份数据并且恢复。
+
+允许用户远程访问：grant all privileges on *.* to 'root'@'%' identified by 'password' with #grant option;
+
+​           GRANT ALL PRIVILEGES ON *.* TO ['root'@'%'](mailto: root @ %) IDENTIFIED BY 'youpassword' WITH GRANT OPTION;
+
+登录：mysql -h host -u username -p，mysql -h host -u username -p  databasename
+
+创建用户：create user 'username'@'host' identified by 'password';
+
+赋予权限：grant all privileges on *.* to 'username'@'%' identified by 'password'，grant all privileges on *.* to 'username'@'%';
+
+刷新权限：flush privileges;
+
+Windows启动/停止：net start mysql/net stop mysql
+
+Linux启动：service mysqld start
+
+### 安装部署
+
+Windows忘记root密码解决方法：
+
+方法一：
+
+1. 启用mysqld-net --skip-grant-tables;
+
+2. msyq -uroot
+
+3. mysql> use mysql;
+
+​    mysql> update user set password=password('new_passwd') where user='root';
+
+​    mysql> flush privileges;
+
+​    mysql> exit;
+
+4. 关闭刚刚启动的服务，重新正常模式启动MySQL服务
+
+方法二：
+
+1. 首先在 MySQL的安装目录下 新建一个pwdhf.txt, 输入文本：SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new_passwd'); 
+
+2. 然后运行： mysqld-nt --init-file=../pwdhf.txt 
+
+3. 再重新以正常模式启动MYSQL 即可
+
+压缩版安装：
+
+1. 配置内容：
+
+```
+ [client]
+
+  port = 3306
+
+  default-character-set = utf8
+
+  [mysqld]
+
+  port = 3306
+
+  character_set_server = utf8
+
+  basedir =  D:\mysql-5.7.16
+
+  datadir =  D:\mysql-5.7.16\data
+
+  sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+```
+
+ 命令：mysqld --initialize  初始化mysql，生成data中的文件；
+
+命令：mysqld  -install   安装mysql  
+
+命令：net start mysql    启动mysql服务
+
+   其他一些命令：mysqld  -remove   卸载mysql； 
+
+​                 net stop mysql 停止mysql服务；
+
+   mysql和mysqld的区别：mysql为客户端的程序，mysqld为服务器端的程序；
+
+3、配置好以上就可以登录mysql了：
+
+  a、首次登录时由于没有设置root密码，登录会报错，此时在配置文件my.ini中加上skip-grant-tables,保存后，重启mysql服务，在cmd中依次输入：net stop mysql; net start mysql; mysql -uroot -p，回车后就直接登录了；
+
+  b、设置root密码：① 进入mysql数据库：use mysql;
+
+② 设置密：update user set authentication_string=password('xxx') where user='root' and Host = 'localhost';  （5.7版本）
+
+update user set password=password("xxx") where user="root";  （5.5版本）
+
+③ 退出数据库：exit （或者quit）
+
+④ 密码改好后，再进入my.ini，注释掉skip-grant-tables，保存；
+
+⑤ 再重启mysql服务，重新登录即可；
+
+4、再次登录mysql，输入命令：alter user 'root'@'localhost' identified by 'xxx';
+
+退出：quit
+
+至此安装配置完成！可以开始使用mysql了。
+
+Linux压缩版安装：
+
+1. 在解压目录下新建：my.cnf；
+
+2. 内容如下：
+
+[mysqld]
+
+port    = 3306
+
+basedir    =/users/zgyjs/mysql5.6
+
+datadir    =/users/zgyjs/mysql5.6/data
+
+3. 安装配置数据库
+
+./scripts/mysql_install_db --user=linux_user --defaults-file=./my.cnf
+
+4. 启动
+
+./bin/mysqld_safe --defaults-file=./my.cnf --user=linux_user 启动服务
+
+./bin/mysql -uroot
+
+常用简单操作：
+
+检查是否有进程：ps -ef | gerp mysqld
+
+启动：./bin/mysqld_safe --defaults-file=./my.cnf --user=zgyjs 
+
+修改root用户密码：mysql> use mysql;
+
+mysql> update user set password=password('new_passward') where user='root';
+
+mysql> flush privileges;
+
 ## 附录.A MySQL
 
 MySQL官方有个自带的测试数据库，叫employees，超过30W用户数据。

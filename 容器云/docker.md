@@ -470,3 +470,42 @@ docker run -it --name container3 --net frontend busybox
 
 ![image-20191221223632358](assets/image-20191221223632358.png)
 
+## 各种服务docker部署
+
+### 启动MySQL
+
+通过docker启动一个mysql
+
+docker run -d -p 33306:3306 -e MYSQL_ROOT_PASSWORD="111111" --name mysqlserver mysql:5.7 --character-set-server=utf8 --collation-server=utf8_general_ci
+
+这种方式启动，容器被删除后，里面的数据就没有了！
+
+挂载外部文件目录作为mysql容器的数据库目录
+
+docker run -d -p 33306:3306 --privileged=true 
+
+-v F:\data\dockermount\mysql\my.cnf:/etc/mysql/my.cnf 
+
+-v F:\data\dockermount\mysql\data:/var/lib/mysql 
+
+-v /usr/local/docker/mysql/logs:/var/log/mysql
+
+-e MYSQL_ROOT_PASSWORD=111111
+
+--name mysqlserver mysql:5.7
+
+docker run -p 3306:3306 --name mysql 
+
+-v /home/ubuntu/mysql/conf:/etc/mysql/conf.d 
+
+-v /home/ubuntu/mysql/logs:/logs 
+
+-v /home/ubuntu/mysql/data:/var/lib/mysql 
+
+-e MYSQL_ROOT_PASSWORD=root 
+
+-d mysql:5.7
+
+### 启动Jenkins
+
+docker run -d --rm -u root -p 8080:8080 -v jenkins-data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home --name jenkinsserver jenkinsci/blueocean
