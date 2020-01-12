@@ -16,3 +16,9 @@
 * [操作系统](操作系统/README.md)
   * [操作系统](操作系统/linux_os.md)
   * [CentOS](操作系统/centos.md)
+
+* [开发设计](design/README.md)
+  * [重构](design/refactoring.md)
+  * [设计模式](design/设计模式.md)
+  * [实现模式](design/实现模式.md)
+
