@@ -143,6 +143,18 @@ newgrp docker
 
 ## 使用
 
+| 子命令分类     | 子命令                                                   |
+| -------------- | -------------------------------------------------------- |
+| docker环境信息 | info，version                                            |
+| 容器生命周期   | create，exec，kill，pause，restart，rm，run，start，stop |
+| 镜像仓库命令   | login，logout，pull，push，search                        |
+| 镜像管理       | build，images，import，load，rmi，save，tag，commit      |
+| 容器运维操作   | attach，export，inspect，port，ps，rename，stats，top    |
+| 容器资源管理   | volume，network                                          |
+| 系统日志信息   | events，history，logs                                    |
+
+![img](assets/clipboard.png)
+
 ### 基本命令
 
 容器运行ubuntu并输出hello world
